@@ -54,16 +54,16 @@ function BoardCover(){
 		}
 	}
 }
-function getMap(k){
-    let tArray = new Array(2**k);
-    for(let i = 0; i < 2**k; i++){
-        tArray[i] = new Array(2**k);
-        for(let j = 0; j < 2**k; j++){
-            tArray[i][j] = 0;
-        }
-    }
-    return tArray;
-}
+// function getMap(k){
+//     let tArray = new Array(2**k);
+//     for(let i = 0; i < 2**k; i++){
+//         tArray[i] = new Array(2**k);
+//         for(let j = 0; j < 2**k; j++){
+//             tArray[i][j] = 0;
+//         }
+//     }
+//     return tArray;
+// }
 
 function main() {
     boardCover = new BoardCover();
@@ -78,4 +78,4 @@ function main() {
     console.log("map\n",map);
 }
 
-main();
+// main();

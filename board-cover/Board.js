@@ -25,6 +25,7 @@ function Board() {
      * @param color
      */
     this.drowRect = function (pen, x, y, r, color){
+        pen.fillStyle = color;
         pen.beginPath();
         pen.moveTo(x, y);
         pen.lineTo(x+r, y);
@@ -32,10 +33,10 @@ function Board() {
         pen.lineTo(x, y+r);
         pen.lineTo(x, y);
         pen.closePath();
-        pen.fillStyle = color;
 
         pen.fill();
         pen.stroke();
+        pen.fillStyle = 'dark';
     }
     /**
      * A 类型骨型牌
@@ -45,7 +46,7 @@ function Board() {
      * @param r
      */
     this.drowRectA = function (pen, x, y, r){
-        let color = "red";
+        let color = "#bb1c33";
         this.drowRect(pen, x, y, r, color);
         this.drowRect(pen, x + r, y, r, color);
         this.drowRect(pen, x, y + r, r, color);

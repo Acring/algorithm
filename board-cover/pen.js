@@ -79,15 +79,3 @@ function showABCD(){
 	
 }
 
-window.onload = function(){
-	showABCD();
-	let canvas = document.getElementById("canvas");
-	let pen;
-	canvas.width = 800;
-	canvas.height = 600;
-	pen = canvas.getContext("2d");
-	drowBoard(pen, 50, 50, 50, 10);
-	drowRectD(pen, 50, 50, 50);
-
-
-}

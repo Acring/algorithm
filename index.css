@@ -1,9 +1,19 @@
 .main-layout{
     width: 1400px;
-    min-height: 800px;
+    /*min-height: 800px;*/
     margin-top: 10px;
     margin-bottom: 10px;
 /*    border: 1px solid gray;
     border-radius: 5px;
     height: auto;*/
+ }
+
+ .my-title{
+ 	width: 800px;
+ 	text-align: center;
+ }
+
+ .my-quote{
+ 	width: 800px; 
+ 	margin-top: 50px
  }

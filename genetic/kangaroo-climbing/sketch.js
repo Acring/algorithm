@@ -1,8 +1,8 @@
-let algorithm;
 let steps = 3;  // 点距
-let numberOfKangaroo = 3;  // 袋鼠数量
+let numberOfKangaroo = 10;  // 袋鼠数量
 let kangarooList = [];
-let autoRun = true;
+let autoRun = false;
+let move = false;
 function setup() {
 
    	let canvas = createCanvas(1000, 1000);
@@ -10,9 +10,8 @@ function setup() {
   	canvas.parent('sketch-holder');
   	background(255,255,255);
     frameRate(1);  // 设置速度
-
-    algorithm = new Algorithm();
     initKangaroo();  // 初始化袋鼠
+    moveAStep();
 }
 
 // function suitable(x){
@@ -22,18 +21,31 @@ function setup() {
 // }
 
 function draw() {
-    if(autoRun){
-        background(255,255,255);
-        for(horizon = 0; horizon < 1000; horizon += steps){
-            drawLand(horizon);
+    if(autoRun || move){
+        if(move){
+            move = false;
         }
-        for(let k of kangarooList){
-            drawKangarou(k.liveHorizon);
-            let ok = kangarooList[parseInt(Math.random()*(kangarooList.length-1))];
-            k.evolution(ok);
-        }
-
+        moveAStep();
     }
+}
+
+function moveAStep(){
+    background(255,255,255);
+    for(horizon = 0; horizon < 1000; horizon += steps){
+        drawLand(horizon);
+    }
+    for(let k = 0; k < kangarooList.length; k++){
+        drawKangarou(kangarooList[k].liveHorizon);
+
+        let otherK = kangarooList[k+1];
+        if(!otherK){
+            break;
+        }
+        kangarooList[k].evolution(otherK);
+    }
+    kangarooList = Algorithm.screen(kangarooList);
+    kangarooList.sort(sortKangaroo);
+    console.log(kangarooList);
 }
 
 function drawLand(horizon){
@@ -60,8 +72,14 @@ function initKangaroo(){
         let horizon = parseInt(Math.random() * 1000);
         kangarooList.push(new Kangaroo(horizon));
     }
+    kangarooList.sort(sortKangaroo);
+    console.log(kangarooList);
 }
 
-function evolution() {
+function sortKangaroo(kangarooA, kangarooB){
+    return kangarooA.liveHorizon > kangarooB.liveHorizon;
+}
 
+function setMove(){
+    move = true;
 }

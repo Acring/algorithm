@@ -1,3 +1,5 @@
+
+
 /**
  * Created by Acring on 2017/10/22.
  */
@@ -17,15 +19,14 @@ class Kangaroo{
         this.liveHorizon = Horizon;
         this.suitable = Algorithm.suitable(Horizon);
         this.liveHeight = this.suitable;
-        console.log(this.liveHorizon);
-        this._encodeHeight();
+        this._encodeHorizon();
     }
 
     /**
      * 基因编码
      * @private
      */
-    _encodeHeight(){
+    _encodeHorizon(){
         let temp: number = this.liveHorizon;
         let pos = 0;
         while(temp > 0){
@@ -33,7 +34,6 @@ class Kangaroo{
             temp = parseInt((temp/2).toString());
             pos += 1;
         }
-        console.log(this.horizonEncode);
         return;
     }
 
@@ -41,7 +41,7 @@ class Kangaroo{
      * 基因反编码
      * @private
      */
-    _decodeHeight(){
+    _decodeHorizon(){
         this.liveHorizon = 0;
         let index = 0;
         for(let temp in this.horizonEncode){
@@ -56,7 +56,7 @@ class Kangaroo{
      */
     _exchange(otherKangaroo){
         if(Kangaroo.exProbability > Math.random() && otherKangaroo){
-            console.log('发生了基因交换');
+            // console.log('发生了基因交换');
 
             let positionA: number = Math.random()*(+this.horizonEncode.length - 1);
             let changeLength: number = Math.random()*this.horizonEncode.length * Kangaroo.exProbability/2;
@@ -66,7 +66,6 @@ class Kangaroo{
             // let positionB: number = Math.random()*(+otherKangaroo.horizonEncode.length - temp.length); // 防止交换长度不同
             this.horizonEncode.splice(positionA, 0, ...otherKangaroo.horizonEncode.splice(positionA, temp.length));
             otherKangaroo.horizonEncode.splice(positionA, 0, ...temp);
-            console.log(this.horizonEncode);
         }
     }
 
@@ -75,14 +74,14 @@ class Kangaroo{
      */
     _mutation(){
         let mutation = Kangaroo.muProbability -  Math.random();
-            console.log("发生变异");
+            // console.log("发生变异");
             // console.log(this.horizonEncode.toString());
         if(mutation > 0){  // 发生变异
             for(let x = mutation*10; x > 0; x -= 1){
                 let pos = parseInt((Math.random()*(this.horizonEncode.length - 1)).toString());
                 this.horizonEncode[pos] = this.horizonEncode[pos] ^ 1;
             }
-            console.log(this.horizonEncode.toString());
+            // console.log(this.horizonEncode.toString());
         }
     }
 
@@ -92,8 +91,9 @@ class Kangaroo{
     evolution(otherKangarous?:Kangaroo){
         // console.log(otherKangarous);
         this._exchange(otherKangarous);
-        // this._mutation();
-        this._decodeHeight();
-        console.log(this.liveHorizon);
+        this._mutation();
+        this._decodeHorizon();
+        this.suitable = Algorithm.suitable(this.liveHorizon);
+        // console.log(this.liveHorizon);
     }
 }

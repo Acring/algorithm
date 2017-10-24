@@ -41,7 +41,35 @@
 			<div class="center-block my-title">
 				<h2>可视化实现</h2>
 			</div>
-			<button type="button" onclick="setMove()">run</button>
+			<div style="text-align: center; padding: 10px;">
+				<h2 >代数: </h2><h2 id="generations" >0</h2>
+			</div>
+			<form id="param" >
+				<div class="col-lg-4">
+					<div class="input-group">
+						<span class="input-group-addon">袋鼠数量</span>
+						<input type="text" name="numberOfKangaroos" class="form-control" value="100">
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="input-group">
+						<span class="input-group-addon">变异率</span>
+						<input type="text" name="mutationRate" class="form-control" value="0.01">
+					</div>
+
+				</div>
+				<div class="col-lg-4">
+					<div class="input-group">
+						<span class="input-group-addon">交换率</span>
+						<input type="text" name="exchangeRate" class="form-control" value="0.5">
+					</div>
+				</div>
+				<div align="center"  >
+					<input class="btn btn-primary" type="button" onclick="resetWorld(numberOfKangaroos.value, mutationRate.value, exchangeRate.value)" style="margin-top: 20px;" value="重置种群">
+					<input class="btn btn-primary" type="button" onclick="setMove()" style="margin-top: 20px;" value="种群进化一代">
+					<input class="btn btn-primary" type="button" onclick="setAutoRun()" style="margin-top: 20px;" value="自动 / 停止进化">
+				</div>
+			</form>
 			<div style="text-align: center;">
 				<div id="sketch-holder" class="center-block">
 				</div>

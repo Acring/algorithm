@@ -1,7 +1,7 @@
 /**
  * Created by Acring on 2017/10/22.
  */
-var Kangaroo = /** @class */ (function () {
+var Kangaroo = (function () {
     function Kangaroo(Horizon) {
         this.horizonEncode = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         if (Horizon == null) {
@@ -9,8 +9,8 @@ var Kangaroo = /** @class */ (function () {
             return;
         }
         this.liveHorizon = Horizon;
-        this.suitable = Algorithm.suitable(Horizon);
-        this.liveHeight = this.suitable;
+        this.suitable = Math.floor(Math.pow(Algorithm.suitable(this.liveHorizon), 2));
+        this.liveHeight = Algorithm.suitable(Horizon);
         this._encodeHorizon();
     }
     /**
@@ -46,13 +46,14 @@ var Kangaroo = /** @class */ (function () {
     Kangaroo.prototype._exchange = function (otherKangaroo) {
         if (Kangaroo.exProbability > Math.random() && otherKangaroo) {
             // console.log('发生了基因交换');
-            var positionA = Math.random() * (+this.horizonEncode.length - 1);
-            var changeLength = Math.random() * this.horizonEncode.length * Kangaroo.exProbability / 2;
+            // console.log(`this: ${this.horizonEncode.toString()}, other: ${otherKangaroo.horizonEncode.toString()} ->`);
+            var positionA = parseInt((Math.random() * (+this.horizonEncode.length - 1)).toString());
+            var changeLength = parseInt((Math.random() * this.horizonEncode.length * Kangaroo.exProbability / 2).toString());
             var temp = void 0;
             temp = this.horizonEncode.splice(positionA, positionA + changeLength);
-            // let positionB: number = Math.random()*(+otherKangaroo.horizonEncode.length - temp.length); // 防止交换长度不同
             (_a = this.horizonEncode).splice.apply(_a, [positionA, 0].concat(otherKangaroo.horizonEncode.splice(positionA, temp.length)));
             (_b = otherKangaroo.horizonEncode).splice.apply(_b, [positionA, 0].concat(temp));
+            // console.log(`this: ${this.horizonEncode.toString()}, other: ${otherKangaroo.horizonEncode.toString()}`);
         }
         var _a, _b;
     };
@@ -61,9 +62,10 @@ var Kangaroo = /** @class */ (function () {
      */
     Kangaroo.prototype._mutation = function () {
         var mutation = Kangaroo.muProbability - Math.random();
-        // console.log("发生变异");
-        // console.log(this.horizonEncode.toString());
         if (mutation > 0) {
+            // console.log(this.horizonEncode.toString());
+            // console.log("发生变异");
+            // console.log(this.horizonEncode.toString(), '->');
             for (var x = mutation * 10; x > 0; x -= 1) {
                 var pos = parseInt((Math.random() * (this.horizonEncode.length - 1)).toString());
                 this.horizonEncode[pos] = this.horizonEncode[pos] ^ 1;
@@ -79,10 +81,11 @@ var Kangaroo = /** @class */ (function () {
         this._exchange(otherKangarous);
         this._mutation();
         this._decodeHorizon();
-        this.suitable = Algorithm.suitable(this.liveHorizon);
+        this.suitable = Math.floor(Math.pow(Algorithm.suitable(this.liveHorizon), 2));
+        this.liveHeight = Algorithm.suitable(this.liveHorizon);
         // console.log(this.liveHorizon);
     };
-    Kangaroo.muProbability = 0.2;
-    Kangaroo.exProbability = 0.9;
     return Kangaroo;
 }());
+Kangaroo.muProbability = 0.01;
+Kangaroo.exProbability = 0.5;

@@ -45,7 +45,7 @@ var Kangaroo = (function () {
      */
     Kangaroo.prototype._exchange = function (otherKangaroo) {
         if (Kangaroo.exProbability > Math.random() && otherKangaroo) {
-            // console.log('发生了基因交换');
+            console.log('发生了基因交换');
             // console.log(`this: ${this.horizonEncode.toString()}, other: ${otherKangaroo.horizonEncode.toString()} ->`);
             var positionA = parseInt((Math.random() * (+this.horizonEncode.length - 1)).toString());
             var changeLength = parseInt((Math.random() * this.horizonEncode.length * Kangaroo.exProbability / 2).toString());
@@ -64,7 +64,7 @@ var Kangaroo = (function () {
         var mutation = Kangaroo.muProbability - Math.random();
         if (mutation > 0) {
             // console.log(this.horizonEncode.toString());
-            // console.log("发生变异");
+            console.log("发生变异");
             // console.log(this.horizonEncode.toString(), '->');
             for (var x = mutation * 10; x > 0; x -= 1) {
                 var pos = parseInt((Math.random() * (this.horizonEncode.length - 1)).toString());

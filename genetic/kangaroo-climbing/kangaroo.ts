@@ -55,7 +55,7 @@ class Kangaroo{
      */
     _exchange(otherKangaroo){
         if(Kangaroo.exProbability > Math.random() && otherKangaroo){
-            // console.log('发生了基因交换');
+            console.log('发生了基因交换');
             // console.log(`this: ${this.horizonEncode.toString()}, other: ${otherKangaroo.horizonEncode.toString()} ->`);
 
             let positionA: number = parseInt((Math.random()*(+this.horizonEncode.length - 1)).toString());
@@ -77,7 +77,7 @@ class Kangaroo{
         let mutation = Kangaroo.muProbability -  Math.random();
         if(mutation > 0){  // 发生变异
             // console.log(this.horizonEncode.toString());
-            // console.log("发生变异");
+            console.log("发生变异");
             // console.log(this.horizonEncode.toString(), '->');
             for(let x = mutation*10; x > 0; x -= 1){
                 let pos = parseInt((Math.random()*(this.horizonEncode.length - 1)).toString());

@@ -56,7 +56,7 @@ function drawLand(horizon){
     ellipse(horizon, 1000-y, r, r);
 }
 
-function drawKangarou(horizon, ) {
+function drawKangarou(horizon) {
     if(horizon > 1000){
         horizon = 1000;
     }
@@ -102,7 +102,6 @@ function resetWorld(nok, mr, er) {
     if(isNaN(nok) || isNaN(mr) || isNaN(er)){
         return;
     }
-    console.log(nok,mr,er);
     if(nok > 1000){
         alert('袋鼠太多挤不下啦');
         return;
